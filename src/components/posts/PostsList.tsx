@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PostCard from "./PostCard";
+import ViewPostDialog from "./ViewPostDialog";
 
 // Mock post data
 const mockPosts = [
@@ -69,66 +70,81 @@ const mockPosts = [
 
 const PostsList = () => {
   const [activeTab, setActiveTab] = useState("all");
+  const [selectedPost, setSelectedPost] = useState<any>(null);
+  const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
   
   // Filter posts based on active tab
   const filteredPosts = activeTab === "all" 
     ? mockPosts 
     : mockPosts.filter(post => post.status === activeTab);
   
+  const handlePostView = (post: any) => {
+    setSelectedPost(post);
+    setIsViewDialogOpen(true);
+  };
+  
   return (
-    <Card>
-      <Tabs defaultValue="all" onValueChange={setActiveTab}>
-        <div className="border-b px-6 py-3">
-          <TabsList className="grid grid-cols-5 w-full max-w-md">
-            <TabsTrigger value="all">All</TabsTrigger>
-            <TabsTrigger value="draft">Drafts</TabsTrigger>
-            <TabsTrigger value="scheduled">Scheduled</TabsTrigger>
-            <TabsTrigger value="published">Published</TabsTrigger>
-            <TabsTrigger value="failed">Failed</TabsTrigger>
-          </TabsList>
-        </div>
+    <>
+      <Card>
+        <Tabs defaultValue="all" onValueChange={setActiveTab}>
+          <div className="border-b px-6 py-3">
+            <TabsList className="grid grid-cols-5 w-full max-w-md">
+              <TabsTrigger value="all">All</TabsTrigger>
+              <TabsTrigger value="draft">Drafts</TabsTrigger>
+              <TabsTrigger value="scheduled">Scheduled</TabsTrigger>
+              <TabsTrigger value="published">Published</TabsTrigger>
+              <TabsTrigger value="failed">Failed</TabsTrigger>
+            </TabsList>
+          </div>
 
-        <CardContent className="p-6">
-          <TabsContent value="all" className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredPosts.map(post => (
-                <PostCard key={post.id} post={post} />
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="draft" className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredPosts.map(post => (
-                <PostCard key={post.id} post={post} />
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="scheduled" className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredPosts.map(post => (
-                <PostCard key={post.id} post={post} />
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="published" className="mt-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredPosts.map(post => (
-                <PostCard key={post.id} post={post} />
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="failed" className="mt-0">
-            <div className="text-center py-8 text-muted-foreground">
-              No failed posts
-            </div>
-          </TabsContent>
-        </CardContent>
-      </Tabs>
-    </Card>
+          <CardContent className="p-6">
+            <TabsContent value="all" className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredPosts.map(post => (
+                  <PostCard key={post.id} post={post} onView={handlePostView} />
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="draft" className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredPosts.map(post => (
+                  <PostCard key={post.id} post={post} onView={handlePostView} />
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="scheduled" className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredPosts.map(post => (
+                  <PostCard key={post.id} post={post} onView={handlePostView} />
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="published" className="mt-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredPosts.map(post => (
+                  <PostCard key={post.id} post={post} onView={handlePostView} />
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="failed" className="mt-0">
+              <div className="text-center py-8 text-muted-foreground">
+                No failed posts
+              </div>
+            </TabsContent>
+          </CardContent>
+        </Tabs>
+      </Card>
+      
+      <ViewPostDialog 
+        open={isViewDialogOpen}
+        onOpenChange={setIsViewDialogOpen}
+        post={selectedPost}
+      />
+    </>
   );
 };
 
