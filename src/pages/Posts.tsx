@@ -2,12 +2,23 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import PostsList from "@/components/posts/PostsList";
 import CreatePostDialog from "@/components/posts/CreatePostDialog";
 
 const Posts = () => {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const location = useLocation();
+
+  // Check if we should open the create dialog based on navigation state
+  useEffect(() => {
+    if (location.state?.openCreateDialog) {
+      setIsCreateDialogOpen(true);
+      // Clear the state to prevent reopening on page refresh
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   return (
     <DashboardLayout title="Posts" subtitle="Create and manage your social content">

@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { 
   Calendar, 
   Plus, 
@@ -42,6 +42,12 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ currentPath }: SidebarProps) => {
+  const navigate = useNavigate();
+  
+  const handleCreatePost = () => {
+    navigate('/posts', { state: { openCreateDialog: true } });
+  };
+  
   return (
     <div className="bg-sidebar h-screen flex flex-col border-r border-sidebar-border">
       <div className="p-6">
@@ -52,7 +58,11 @@ const Sidebar = ({ currentPath }: SidebarProps) => {
       </div>
       
       <div className="mt-2 px-3">
-        <Button className="w-full bg-gradient-brand hover:opacity-90" size="lg">
+        <Button 
+          className="w-full bg-gradient-brand hover:opacity-90" 
+          size="lg"
+          onClick={handleCreatePost}
+        >
           <Plus className="h-4 w-4 mr-2" />
           Create Post
         </Button>
