@@ -2,7 +2,7 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AreaChart, BarChart } from "@/components/ui/chart";
+import { AreaChart, BarChart } from "@/components/ui/custom-charts";
 import { Badge } from "@/components/ui/badge";
 
 const engagementData = [
