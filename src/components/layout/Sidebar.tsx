@@ -7,7 +7,8 @@ import {
   BarChart, 
   MessageSquare, 
   Settings, 
-  Users 
+  Users,
+  FileText 
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -63,6 +64,12 @@ const Sidebar = ({ currentPath }: SidebarProps) => {
           label="Calendar" 
           href="/" 
           active={currentPath === "/"}
+        />
+        <SidebarItem 
+          icon={<FileText className="h-5 w-5" />} 
+          label="Posts" 
+          href="/posts" 
+          active={currentPath === "/posts"}
         />
         <SidebarItem 
           icon={<BarChart className="h-5 w-5" />} 
