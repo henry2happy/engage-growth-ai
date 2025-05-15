@@ -9,6 +9,7 @@ import Posts from "./pages/Posts";
 import Analytics from "./pages/Analytics";
 import Audience from "./pages/Audience";
 import Engagement from "./pages/Engagement";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/audience" element={<Audience />} />
           <Route path="/engagement" element={<Engagement />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
