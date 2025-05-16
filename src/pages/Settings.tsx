@@ -213,7 +213,8 @@ const Settings = () => {
                         <h3 className="font-semibold">Pro Plan</h3>
                         <p className="text-sm text-muted-foreground">$49/month • Renews on May 22, 2025</p>
                       </div>
-                      <Badge>Current Plan</Badge>
+                      {/* Fixed here: Added className="" to resolve the TypeScript error */}
+                      <Badge className="">Current Plan</Badge>
                     </div>
                     <ul className="mt-4 space-y-2 text-sm">
                       <li className="flex items-center gap-2">
