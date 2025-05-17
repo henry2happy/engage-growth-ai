@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 import { toast } from "@/hooks/use-toast";
 
 const Settings = () => {
@@ -213,8 +213,7 @@ const Settings = () => {
                         <h3 className="font-semibold">Pro Plan</h3>
                         <p className="text-sm text-muted-foreground">$49/month • Renews on May 22, 2025</p>
                       </div>
-                      {/* Fixed here: Added className="" to resolve the TypeScript error */}
-                      <Badge className="">Current Plan</Badge>
+                      <Badge variant="secondary">Current Plan</Badge>
                     </div>
                     <ul className="mt-4 space-y-2 text-sm">
                       <li className="flex items-center gap-2">
@@ -303,12 +302,6 @@ const Textarea = ({ className, ...props }) => (
     className={`flex min-h-80 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
     {...props}
   />
-);
-
-const Badge = ({ children, className }) => (
-  <span className={`inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 ${className}`}>
-    {children}
-  </span>
 );
 
 const CheckIcon = (props) => (
